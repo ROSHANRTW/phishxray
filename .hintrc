@@ -20,6 +20,7 @@
           "user-select"
         ]
       }
-    ]
+    ],
+    "apple-touch-icons": "off"
   }
 }
