@@ -5,19 +5,13 @@ const authRoutes = require('./routes/auth');
 
 const app = express();
 app.use(express.json());
-
-// ✅ CORS configuration
-app.use(cors({
-  origin: ['http://localhost:3000', 'https://phishxray-frontend.onrender.com'],
-  methods: ['GET', 'POST'],
-  credentials: true
-}));
+app.use(cors());
 
 // MongoDB URI
 const mongoURI = 'mongodb+srv://rathvaroshan23:Roshanxray@phishxray.75cshl5.mongodb.net/?retryWrites=true&w=majority&appName=Phishxray';
 
-// Connect to MongoDB
-mongoose.connect(mongoURI)
+// Connect MongoDB
+mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('MongoDB connected successfully'))
   .catch((err) => console.error('MongoDB connection error:', err));
 
