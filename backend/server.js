@@ -1,25 +1,25 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const cors = require("cors");
-const dotenv = require("dotenv");
+const cors = require('cors');
 const authRoutes = require('./routes/auth');
-
-// Load environment variables
-dotenv.config();
 
 const app = express();
 app.use(express.json());
 app.use(cors());
 
-// MongoDB connection using Atlas URI
-mongoose.connect(process.env.MONGO_URI, {
+// Directly hardcoded MongoDB URI
+const mongoURI = 'mongodb+srv://rathvaroshan23:Roshanxray@phishxray.75cshl5.mongodb.net/?retryWrites=true&w=majority&appName=Phishxray';
+
+mongoose.connect(mongoURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
-.then(() => console.log("✅ MongoDB Atlas connected successfully"))
-.catch((err) => console.error("❌ MongoDB connection error:", err));
+.then(() => console.log('MongoDB connected successfully'))
+.catch((err) => console.error('MongoDB connection error:', err));
 
+// Routes
 app.use('/api/auth', authRoutes);
 
-const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => console.log(`🚀 Backend running on port ${PORT}`));
+// Hardcoded Port
+const PORT = 8080;
+app.listen(PORT, () => console.log(`Backend running on port ${PORT}`));
