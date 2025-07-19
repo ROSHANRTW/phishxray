@@ -5,12 +5,18 @@ const authRoutes = require('./routes/auth');
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+
+// ✅ CORS configuration
+app.use(cors({
+  origin: ['http://localhost:3000', 'https://phishxray-frontend.onrender.com'],
+  methods: ['GET', 'POST'],
+  credentials: true
+}));
 
 // MongoDB URI
 const mongoURI = 'mongodb+srv://rathvaroshan23:Roshanxray@phishxray.75cshl5.mongodb.net/?retryWrites=true&w=majority&appName=Phishxray';
 
-// Connect to MongoDB without deprecated options
+// Connect to MongoDB
 mongoose.connect(mongoURI)
   .then(() => console.log('MongoDB connected successfully'))
   .catch((err) => console.error('MongoDB connection error:', err));
